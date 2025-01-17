@@ -1,13 +1,11 @@
-version: '3.8'
-
 services:
-  app:
-    build: .
+  pg:
+    image: bitnami/postgresql:latest
     ports:
-      - "3333:3333"
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - '5432:5432'
     environment:
-      - NODE_ENV=development
-    command: pnpm dev
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=upload
+    volumes:
+      - './docker:/docker-entrypoint-initdb.d' 
