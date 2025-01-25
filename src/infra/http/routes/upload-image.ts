@@ -36,13 +36,14 @@ export const uploadImageRoute: FastifyPluginAsync = async server => {
       })
 
       if (isRight(result)) {
+        console.log('Uploaded image: ', unwrapEither(result))
         return reply.status(201).send()
       }
 
       const error = unwrapEither(result)
 
       switch (error.constructor.name) {
-        case 'InvalidFileError':
+        case 'InvalidFileFormat':
           return reply.status(400).send({ message: error.message })
         default:
           return reply.status(500).send({ message: 'Internal server error' })
