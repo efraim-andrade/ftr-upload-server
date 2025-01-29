@@ -23,6 +23,9 @@ dependencies:
   '@fastify/swagger-ui':
     specifier: ^5.2.1
     version: 5.2.1
+  dayjs:
+    specifier: ^1.11.13
+    version: 1.11.13
   drizzle-orm:
     specifier: ^0.38.4
     version: 0.38.4(postgres@3.4.5)
@@ -46,6 +49,9 @@ devDependencies:
   '@biomejs/biome':
     specifier: ^1.9.4
     version: 1.9.4
+  '@faker-js/faker':
+    specifier: ^9.4.0
+    version: 9.4.0
   '@types/node':
     specifier: ^22.10.7
     version: 22.10.7
@@ -1611,6 +1617,11 @@ packages:
     dev: true
     optional: true
 
+  /@faker-js/faker@9.4.0:
+    resolution: {integrity: sha512-85+k0AxaZSTowL0gXp8zYWDIrWclTbRPg/pm/V0dSFZ6W6D4lhcG3uuZl4zLsEKfEvs69xDbLN2cHQudwp95JA==}
+    engines: {node: '>=18.0.0', npm: '>=9.0.0'}
+    dev: true
+
   /@fastify/accept-negotiator@2.0.1:
     resolution: {integrity: sha512-/c/TW2bO/v9JeEgoD/g1G5GxGeCF1Hafdf79WPmUlgYiBXummY0oX3VVq4yFkKKVBKDNlaDUYoab7g38RpPqCQ==}
     dev: false
@@ -2595,6 +2606,10 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  /dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
+    dev: false
 
   /debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
