@@ -13,7 +13,7 @@ export async function makeUpload(
     .values({
       name: fileName,
       remoteKey: `images/${fileName}`,
-      remoteUrl: `http://example.com/images/${fileName}`,
+      remoteUrl: `http://my-images.com/images/${fileName}`,
       ...overrides,
     })
     .returning()
