@@ -10,7 +10,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest'
 
 describe('upload image', () => {
   beforeAll(() => {
-    vi.mock('@infra/storage/upload-file-to-storage', () => {
+    vi.mock('@/infra/storage/upload-file-to-storage', () => {
       return {
         uploadFileToStorage: vi.fn().mockImplementation(() => {
           return {
