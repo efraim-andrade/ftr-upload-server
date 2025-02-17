@@ -1,15 +1,16 @@
-FROM node:20-slim
+# base image
+FROM node:20.18 
 
-WORKDIR /app
+RUN npm i -g pnpm
+
+WORKDIR /usr/src/app
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN npm install -g pnpm && \
-    pnpm install
+RUN pnpm install  
 
 COPY . .
 
 EXPOSE 3333
 
 CMD ["pnpm", "dev"]
-
