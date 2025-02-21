@@ -43,12 +43,17 @@ COPY --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/package.json ./package.json
 
-ENV DATABASE_URL='postgresql://#'
-ENV CLOUDFLARE_ACCOUNT_ID='#'
-ENV CLOUDFLARE_ACCESS_KEY_ID="#"
-ENV CLOUDFLARE_SECRET_ACCESS_KEY="#"
-ENV CLOUDFLARE_BUCKET="#"
-ENV CLOUDFLARE_PUBLIC_URL="https://pub-localhost.r2.dev"
+# We can use this way to non sensible variables and when have the same value on all the environments
+# the good practice is to put on terminal command like, -e ENV='value': docker run -p 3000:3333 -e CLOUDFLARE_ENV='' -d upload-widget-server:v1 
+# ENV DATABASE_URL='postgresql://#'
+# ENV CLOUDFLARE_ACCOUNT_ID='#'
+# ENV CLOUDFLARE_ACCESS_KEY_ID="#"
+# ENV CLOUDFLARE_SECRET_ACCESS_KEY="#"
+# ENV CLOUDFLARE_BUCKET="#"
+# ENV CLOUDFLARE_PUBLIC_URL="https://pub-localhost.r2.dev"
+
+# this can be used to pass variables in build time
+# ARG DATABASE_URL='postgresql://#'
 
 EXPOSE 3333
 
