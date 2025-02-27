@@ -36,7 +36,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.ECR_REPOSITORY }}:${{ steps.generate-tag.outputs.sha }}
+          tags: |
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ steps.generate-tag.outputs.sha }}
 
       # - name: Build and push the image to AWS ECR
       #   id: build-push-image
