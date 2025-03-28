@@ -1,5 +1,6 @@
 import { exportUploadsRoute } from '@/infra/http/routes/export-uploads'
 import { getUploadsRoute } from '@/infra/http/routes/get-uploads'
+import { healthCheckRoute } from '@/infra/http/routes/healthCheck'
 import { uploadImageRoute } from '@/infra/http/routes/upload-image'
 import { transformSwaggerSchema } from '@/infra/http/transform-swagger-schema'
 import { fastifyCors } from '@fastify/cors'
@@ -47,6 +48,8 @@ server.register(fastifySwagger, {
 server.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
+
+server.register(healthCheckRoute)
 
 server.register(uploadImageRoute)
 server.register(getUploadsRoute)
