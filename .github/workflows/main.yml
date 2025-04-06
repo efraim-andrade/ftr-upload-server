@@ -104,7 +104,7 @@ jobs:
           task-definition: ${{ steps.render-task-definition.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+          wait-for-service-stability: false
 
       # - name: Build and push the image to AWS ECR
       #   id: build-push-image
