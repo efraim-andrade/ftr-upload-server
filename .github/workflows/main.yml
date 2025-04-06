@@ -82,6 +82,23 @@ jobs:
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ steps.generate-tag.outputs.sha }}
 
+      - name: Render task definition
+        id: render-task-definition
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .aws/task-definition.json
+          container-name: upload-widget-server
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ steps.generate-tag.outputs.sha }}
+
+      - name: Deploy amazon ecs
+        id: deploy-amazon-ecs
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.render-task-definition.outputs.task-definition }}
+          service: upload-widget-service
+          cluster: rocketseat-ecs
+          wait-for-service-stability: true
+
       # - name: Build and push the image to AWS ECR
       #   id: build-push-image
       #   env:
@@ -91,18 +108,19 @@ jobs:
       #   run: |
       #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
       #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      - name: Deploy to app runner
-        id: deploy-app-runner
-        uses: awslabs/amazon-app-runner-deploy@main
-        with:
-          service: ${{ vars.APP_RUNNER_SERVICE_NAME }}
-          image: ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ steps.generate-tag.outputs.sha }}
-          region: ${{vars.AWS_REGION}}
-          cpu: 1
-          memory: 2
-          port: 3333
-          access-role-arn: ${{ secrets.ROLE_ARN }}
-          wait-for-service-stability-seconds: 180
 
-      - name: App Runner Check
-        run: echo "App running... ${{steps.deploy-app-runner.outputs.service-url}}"
+      # - name: Deploy to app runner
+      #   id: deploy-app-runner
+      #   uses: awslabs/amazon-app-runner-deploy@main
+      #   with:
+      #     service: ${{ vars.APP_RUNNER_SERVICE_NAME }}
+      #     image: ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ steps.generate-tag.outputs.sha }}
+      #     region: ${{vars.AWS_REGION}}
+      #     cpu: 1
+      #     memory: 2
+      #     port: 3333
+      #     access-role-arn: ${{ secrets.ROLE_ARN }}
+      #     wait-for-service-stability-seconds: 180
+
+      # - name: App Runner Check
+      #   run: echo "App running... ${{steps.deploy-app-runner.outputs.service-url}}"

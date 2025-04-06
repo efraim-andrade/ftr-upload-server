@@ -1,0 +1,154 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:us-east-2:911691676533:task-definition/upload-widget-server:1",
+  "containerDefinitions": [
+      {
+          "name": "upload-widget-server",
+          "image": "911691676533.dkr.ecr.us-east-2.amazonaws.com/upload-widget-server:cc4128a",
+          "cpu": 786,
+          "memory": 1024,
+          "memoryReservation": 1024,
+          "portMappings": [
+              {
+                  "name": "port",
+                  "containerPort": 3333,
+                  "hostPort": 3333,
+                  "protocol": "tcp",
+                  "appProtocol": "http"
+              }
+          ],
+          "essential": true,
+          "environment": [
+              {
+                  "name": "POSTGRES_USER",
+                  "value": "docker"
+              },
+              {
+                  "name": "CLOUDFLARE_BUCKET",
+                  "value": "upload-server"
+              },
+              {
+                  "name": "DATABASE_URL",
+                  "value": "postgresql://docker"
+              },
+              {
+                  "name": "PORT",
+                  "value": "3333"
+              },
+              {
+                  "name": "CLOUDFLARE_SECRET_ACCESS_KEY",
+                  "value": "e70da33473e825ae05eef8ad55f6c1af7ee93dbcf1d2f458724c61743b1744c1"
+              },
+              {
+                  "name": "CLOUDFLARE_PUBLIC_URL",
+                  "value": "https://pub-cc055d0c41e742f9bbc005c4349540e5.r2.dev"
+              },
+              {
+                  "name": "POSTGRES_PORT",
+                  "value": "5432"
+              },
+              {
+                  "name": "POSTGRES_PASSWORD",
+                  "value": "docker"
+              },
+              {
+                  "name": "NODE_ENV",
+                  "value": "production"
+              },
+              {
+                  "name": "CLOUDFLARE_ACCESS_KEY_ID",
+                  "value": "5a7b7ab179c8473ad5a9a69749b6c174"
+              },
+              {
+                  "name": "POSTGRES_DB",
+                  "value": "upload"
+              },
+              {
+                  "name": "CLOUDFLARE_ACCOUNT_ID",
+                  "value": "41f1c05bd9d43abf5c32d901460fe8d4"
+              }
+          ],
+          "environmentFiles": [],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "ulimits": [],
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-group": "/ecs/upload-widget-server",
+                  "mode": "non-blocking",
+                  "awslogs-create-group": "true",
+                  "max-buffer-size": "25m",
+                  "awslogs-region": "us-east-2",
+                  "awslogs-stream-prefix": "ecs"
+              },
+              "secretOptions": []
+          },
+          "systemControls": []
+      }
+  ],
+  "family": "upload-widget-server",
+  "taskRoleArn": "arn:aws:iam::911691676533:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::911691676533:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 1,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+      {
+          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+      },
+      {
+          "name": "ecs.capability.execution-role-awslogs"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.ecr-auth"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.task-iam-role"
+      },
+      {
+          "name": "ecs.capability.execution-role-ecr-pull"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+      },
+      {
+          "name": "ecs.capability.task-eni"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+      }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+      "EC2",
+      "FARGATE"
+  ],
+  "requiresCompatibilities": [
+      "FARGATE"
+  ],
+  "cpu": "1024",
+  "memory": "2048",
+  "runtimePlatform": {
+      "cpuArchitecture": "X86_64",
+      "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2025-04-02T11:47:50.947Z",
+  "registeredBy": "arn:aws:iam::911691676533:root",
+  "enableFaultInjection": false,
+  "tags": [
+      {
+          "key": "IAC",
+          "value": "false"
+      }
+  ]
+}
