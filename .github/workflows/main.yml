@@ -5,6 +5,13 @@ on:
     branches:
       - 'main'
 
+# we can define here these not sensitive envs or on github actions variables, is the same result
+env:
+  CONTAINER_NAME: upload-widget-server
+  ECS_SERVICE: upload-widget-service
+  ECS_CLUSTER: rocketseat-ecs
+  ECS_TASK_DEFINITION: .aws/task-definition.json
+
 jobs:
   Build:
     name: Build
@@ -86,8 +93,8 @@ jobs:
         id: render-task-definition
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: .aws/task-definition.json
-          container-name: upload-widget-server
+          task-definition: ${{env.ECS_TASK_DEFINITION}}
+          container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ steps.generate-tag.outputs.sha }}
 
       - name: Deploy amazon ecs
@@ -95,8 +102,8 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.render-task-definition.outputs.task-definition }}
-          service: upload-widget-service
-          cluster: rocketseat-ecs
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
 
       # - name: Build and push the image to AWS ECR
